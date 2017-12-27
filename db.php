@@ -48,6 +48,8 @@ function db_coltype($p_table=''){
 			$dbctype[$p_table][$field] = 'd';
 		}else if(strtolower(substr($type,0,5))=='float'){
 			$dbctype[$p_table][$field] = 'f';
+		}else{
+			$dbctype[$p_table][$field] = 'od';
 		}
 	}
 	return $dbctype[$p_table];
@@ -63,7 +65,7 @@ function db_add($p_table='',$p_data=array()) {
 		$type = $dbctype[$p_table][$name];
 		if(!$type) continue;
 		$sql_ins .= $name.',';
-		if($type=="s" || $type=="d" || $type=="ta" || $type=="dt"){
+		if($type=="s" || $type=="d" || $type=="ta" || $type=="dt" || $type == "od"){
 			$sql_value .= '"'.addslashes($value).'",';
 		}else if($type=='i'){
 			$sql_value .= intval($value).',';
